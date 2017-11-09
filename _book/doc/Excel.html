@@ -1,0 +1,414 @@
+
+<!DOCTYPE HTML>
+<html lang="" >
+    <head>
+        <meta charset="UTF-8">
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <title>Excel · GitBook</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="description" content="">
+        <meta name="generator" content="GitBook 3.2.3">
+        
+        
+        
+    
+    <link rel="stylesheet" href="../gitbook/style.css">
+
+    
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-highlight/website.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-search/search.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-fontsettings/website.css">
+                
+            
+        
+
+    
+
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+
+        
+    
+    
+    <meta name="HandheldFriendly" content="true"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="../gitbook/images/apple-touch-icon-precomposed-152.png">
+    <link rel="shortcut icon" href="../gitbook/images/favicon.ico" type="image/x-icon">
+
+    
+    <link rel="next" href="JSON.md" />
+    
+    
+    <link rel="prev" href="parser.html" />
+    
+
+    </head>
+    <body>
+        
+<div class="book">
+    <div class="book-summary">
+        
+            
+<div id="book-search-input" role="search">
+    <input type="text" placeholder="Type to search" />
+</div>
+
+            
+                <nav role="navigation">
+                
+
+
+<ul class="summary">
+    
+    
+
+    
+
+    
+        
+        
+    
+        <li class="chapter " data-level="1.1" data-path="../">
+            
+                <a href="../">
+            
+                    
+                    Introduction
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2" data-path="CLI.md">
+            
+                <span>
+            
+                    
+                    Command line interface
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3" data-path="CowfigOpt.html">
+            
+                <a href="CowfigOpt.html">
+            
+                    
+                    Cowfig options
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4" data-path="Template.html">
+            
+                <a href="Template.html">
+            
+                    
+                    Template format
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5" data-path="parser.html">
+            
+                <a href="parser.html">
+            
+                    
+                    Parser plugins
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter active" data-level="1.5.1" data-path="Excel.html">
+            
+                <a href="Excel.html">
+            
+                    
+                    Excel
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.2" data-path="JSON.md">
+            
+                <span>
+            
+                    
+                    JSON / YAML
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6" data-path="DesignNote.html">
+            
+                <a href="DesignNote.html">
+            
+                    
+                    Design note
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+    
+
+    <li class="divider"></li>
+
+    <li>
+        <a href="https://www.gitbook.com" target="blank" class="gitbook-link">
+            Published with GitBook
+        </a>
+    </li>
+</ul>
+
+
+                </nav>
+            
+        
+    </div>
+
+    <div class="book-body">
+        
+            <div class="body-inner">
+                
+                    
+
+<div class="book-header" role="navigation">
+    
+
+    <!-- Title -->
+    <h1>
+        <i class="fa fa-circle-o-notch fa-spin"></i>
+        <a href=".." >Excel</a>
+    </h1>
+</div>
+
+
+
+
+                    <div class="page-wrapper" tabindex="-1" role="main">
+                        <div class="page-inner">
+                            
+<div id="book-search-results">
+    <div class="search-noresults">
+    
+                                <section class="normal markdown-section">
+                                
+                                <h1 id="excel-parser-for-cowfig-template">Excel parser for Cowfig template</h1>
+<h2 id="cowfig-template-content-format">Cowfig template content format</h2>
+<pre><code>%FILENAME.xlsx?QUERY_STRING
+</code></pre><h2 id="how-to-locate-a-field">How to locate a field</h2>
+<p><strong>Standard field name</strong></p>
+<p>Format: <code>SheetName.A0</code>  </p>
+<p>Use standard Excel field name rule to locate a field.</p>
+<p><strong>ID related</strong></p>
+<p>Format: <code>#ID_NAME(col_shift, row_shift)</code>  </p>
+<p>Parser find the field data equal to #ID<em>NAME first, 
+then get relative location with col-shift and row-shift.<br>Ex: Assume <strong>#A</strong> stored in <strong>Sheet0.B5</strong>, </em>#A(1,2)<em> means field _Sheet0.C7</em>.</p>
+<h2 id="how-to-get-value">How to get value</h2>
+<h3 id="single-field">Single field</h3>
+<p>It is very simple, just specify the field in QUERY_STRING.</p>
+<h3 id="array">Array</h3>
+<p>Format: <code>FieldA [~|:] FieldB</code></p>
+<ul>
+<li>Use <code>~</code> for a column major array.  </li>
+<li>Use <code>:</code> for a row major array.  </li>
+<li>Parser will auto detect one or two dimensional array.</li>
+<li>Use <code>::</code> or <code>~~</code> to force in a two dimensional array.</li>
+</ul>
+<p>Example: <em>array.cowfig</em></p>
+<pre><code class="lang-json">{
+    col_major: &quot;%example.xlsx?Sheet1.A1~Sheet1.C5,
+    row_major: &quot;%example.xlsx?#A(0, 1):#A(5, 5)&quot;,
+    auto_one_way: &quot;%example.xlsx?#B(0, 1)~#B(0, 10)&quot;,
+    force_two_way: &quot;example.xlsx?#B(0, 1)~~#B(0, 10)&quot;
+}
+</code></pre>
+<h2 id="inner-table-query">Inner Table Query</h2>
+<p>In real case, the Excel file always contain many same KEYs in different table.
+It&apos;s hard and not intuition to specify different #ID_NAME for each KEYs.
+Thus, the parser provide inner table query.</p>
+<p>For inner table query, <code>#ID_NAME</code> and <code>#END_ID_NAME</code> is needed to specify the table range.</p>
+<p>Format: <code>#ID_NAME{R(ROW_KEY_A, ROW_KEY_B, ROW_KEY_C)~C(COL_KEY_A, COL_KEY_B)}</code> </p>
+<h2 id="for-key">for KEY</h2>
+<p><code>__for__@</code> + <code>&#x4EFB;&#x610F;&#x540C;&#x5C64;&#x7684; key &#x7684;&#x540D;&#x5B57;</code></p>
+<p>Example: <em>for.cowfig</em></p>
+<pre><code class="lang-json">{ 
+  <span class="hljs-string">&quot;types&quot;</span>: [<span class="hljs-string">&quot;jp0&quot;</span>, <span class="hljs-string">&quot;jp1&quot;</span>, <span class="hljs-string">&quot;y0&quot;</span>, <span class="hljs-string">&quot;y1&quot;</span>],  <span class="hljs-comment">// &#x8A72; key &#x88AB; __for__@ &#x4F7F;&#x7528;&#x5F8C;&#x5373;&#x6703;&#x88AB;&#x522A;&#x9664;</span>
+  <span class="hljs-string">&quot;__for__@types&quot;</span>: {
+    <span class="hljs-string">&quot;__key__Description&quot;</span>: <span class="hljs-string">&quot;This is __key__ ...&quot;</span>, 
+    <span class="hljs-string">&quot;price&quot;</span>: <span class="hljs-string">&apos;%source/fruits.xlsx? #FRUIT_PRICE{C(__key__) : R(TW, US, JP)}&apos;</span>
+  }
+}
+</code></pre>
+<p>Output likes:</p>
+<pre><code>{ 
+  &quot;apple&quot;: {
+    &quot;appleDescription&quot;: &quot;This is apple ...&quot;, 
+    &quot;price&quot;: [30, 3, 90]
+  },
+  &quot;banana&quot;: {
+    &quot;bananaDescription&quot;: &quot;This is banana ...&quot;, 
+    &quot;price&quot;: [30, 3, 90]
+  }
+}
+</code></pre><p><code>__for__</code> + <code>cowfig query &#x8A9E;&#x53E5;</code></p>
+<p>&#x4E0B;&#x9762;&#x4F8B;&#x5B50;&#x5047;&#x8A2D; %source/fruits.xlsx? #FRUIT_NAME(0, 1) : #END_FRUIT_NAME(0, -1) &#x7684;&#x7D50;&#x679C;&#x70BA; [&apos;apple&apos;,&apos;banana&apos;]</p>
+<p>*.cowfig</p>
+<pre><code class="lang-javascript">{ 
+  <span class="hljs-string">&quot;__for__%source/fruits.xlsx? #FRUIT_NAME(0, 1) : #END_FRUIT_NAME(0, -1)&quot;</span>: {
+    <span class="hljs-string">&quot;__key__Description&quot;</span>: <span class="hljs-string">&quot;This is __key__ ...&quot;</span>, 
+    <span class="hljs-string">&quot;price&quot;</span>: <span class="hljs-string">&apos;%source/fruits.xlsx? #FRUIT_PRICE{C(__key__) : R(TW, US, JP)}&apos;</span>
+  }
+}
+</code></pre>
+<p>output</p>
+<pre><code>{ 
+  &quot;apple&quot;: {
+    &quot;appleDescription&quot;: &quot;This is apple ...&quot;, 
+    &quot;price&quot;: [30, 3, 90]
+  },
+  &quot;banana&quot;: {
+    &quot;bananaDescription&quot;: &quot;This is banana ...&quot;, 
+    &quot;price&quot;: [30, 3, 90]
+  }
+}
+</code></pre><h2 id="memo">Memo</h2>
+<ol>
+<li><code>#ID_NAME</code> must be unique in all file.</li>
+<li><code>#ID_NAME</code> and <code>#END_ID_NAME</code> used to specify inner query range.</li>
+</ol>
+
+                                
+                                </section>
+                            
+    </div>
+    <div class="search-results">
+        <div class="has-results">
+            
+            <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+            <ul class="search-results-list"></ul>
+            
+        </div>
+        <div class="no-results">
+            
+            <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+            
+        </div>
+    </div>
+</div>
+
+                        </div>
+                    </div>
+                
+            </div>
+
+            
+                
+                <a href="parser.html" class="navigation navigation-prev " aria-label="Previous page: Parser plugins">
+                    <i class="fa fa-angle-left"></i>
+                </a>
+                
+                
+                <a href="JSON.md" class="navigation navigation-next " aria-label="Next page: JSON / YAML">
+                    <i class="fa fa-angle-right"></i>
+                </a>
+                
+            
+        
+    </div>
+
+    <script>
+        var gitbook = gitbook || [];
+        gitbook.push(function() {
+            gitbook.page.hasChanged({"page":{"title":"Excel","level":"1.5.1","depth":2,"next":{"title":"JSON / YAML","level":"1.5.2","depth":2,"path":"doc/JSON.md","ref":"doc/JSON.md","articles":[]},"previous":{"title":"Parser plugins","level":"1.5","depth":1,"path":"doc/parser.md","ref":"doc/parser.md","articles":[{"title":"Excel","level":"1.5.1","depth":2,"path":"doc/Excel.md","ref":"doc/Excel.md","articles":[]},{"title":"JSON / YAML","level":"1.5.2","depth":2,"path":"doc/JSON.md","ref":"doc/JSON.md","articles":[]}]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":["livereload"],"pluginsConfig":{"livereload":{},"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"doc/Excel.md","mtime":"2017-07-30T01:52:40.000Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2017-10-03T08:08:32.366Z"},"basePath":"..","book":{"language":""}});
+        });
+    </script>
+</div>
+
+        
+    <script src="../gitbook/gitbook.js"></script>
+    <script src="../gitbook/theme.js"></script>
+    
+        
+        <script src="../gitbook/gitbook-plugin-livereload/plugin.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-search/search-engine.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-search/search.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-lunr/lunr.min.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-lunr/search-lunr.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-sharing/buttons.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-fontsettings/fontsettings.js"></script>
+        
+    
+
+    </body>
+</html>
+

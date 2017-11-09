@@ -1,0 +1,423 @@
+
+<!DOCTYPE HTML>
+<html lang="" >
+    <head>
+        <meta charset="UTF-8">
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <title>Introduction · GitBook</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="description" content="">
+        <meta name="generator" content="GitBook 3.2.3">
+        
+        
+        
+    
+    <link rel="stylesheet" href="gitbook/style.css">
+
+    
+            
+                
+                <link rel="stylesheet" href="gitbook/gitbook-plugin-highlight/website.css">
+                
+            
+                
+                <link rel="stylesheet" href="gitbook/gitbook-plugin-search/search.css">
+                
+            
+                
+                <link rel="stylesheet" href="gitbook/gitbook-plugin-fontsettings/website.css">
+                
+            
+        
+
+    
+
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+
+        
+    
+    
+    <meta name="HandheldFriendly" content="true"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="gitbook/images/apple-touch-icon-precomposed-152.png">
+    <link rel="shortcut icon" href="gitbook/images/favicon.ico" type="image/x-icon">
+
+    
+    <link rel="next" href="doc/CLI.md" />
+    
+    
+
+    </head>
+    <body>
+        
+<div class="book">
+    <div class="book-summary">
+        
+            
+<div id="book-search-input" role="search">
+    <input type="text" placeholder="Type to search" />
+</div>
+
+            
+                <nav role="navigation">
+                
+
+
+<ul class="summary">
+    
+    
+
+    
+
+    
+        
+        
+    
+        <li class="chapter active" data-level="1.1" data-path="./">
+            
+                <a href="./">
+            
+                    
+                    Introduction
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2" data-path="doc/CLI.md">
+            
+                <span>
+            
+                    
+                    Command line interface
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3" data-path="doc/CowfigOpt.html">
+            
+                <a href="doc/CowfigOpt.html">
+            
+                    
+                    Cowfig options
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4" data-path="doc/Template.html">
+            
+                <a href="doc/Template.html">
+            
+                    
+                    Template format
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5" data-path="doc/parser.html">
+            
+                <a href="doc/parser.html">
+            
+                    
+                    Parser plugins
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.5.1" data-path="doc/Excel.html">
+            
+                <a href="doc/Excel.html">
+            
+                    
+                    Excel
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.2" data-path="doc/JSON.md">
+            
+                <span>
+            
+                    
+                    JSON / YAML
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6" data-path="doc/DesignNote.html">
+            
+                <a href="doc/DesignNote.html">
+            
+                    
+                    Design note
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+    
+
+    <li class="divider"></li>
+
+    <li>
+        <a href="https://www.gitbook.com" target="blank" class="gitbook-link">
+            Published with GitBook
+        </a>
+    </li>
+</ul>
+
+
+                </nav>
+            
+        
+    </div>
+
+    <div class="book-body">
+        
+            <div class="body-inner">
+                
+                    
+
+<div class="book-header" role="navigation">
+    
+
+    <!-- Title -->
+    <h1>
+        <i class="fa fa-circle-o-notch fa-spin"></i>
+        <a href="." >Introduction</a>
+    </h1>
+</div>
+
+
+
+
+                    <div class="page-wrapper" tabindex="-1" role="main">
+                        <div class="page-inner">
+                            
+<div id="book-search-results">
+    <div class="search-noresults">
+    
+                                <section class="normal markdown-section">
+                                
+                                <h1 id="cowfig">Cowfig</h1>
+<p>Cowfig in a JSON format template parser to generate config.json files.</p>
+<p>JSON file is easy to use for a developer, but hard to read &amp; maintenance for non-developer.</p>
+<p>In most real cases, project always co-works with some non-RD team. 
+They are used to use excel file to evaluate value set is suitable.
+JSON file is too hard to read and maintenance for them.
+A tool to translate excel to JSON config file is necessary.</p>
+<p>Also, different develop staging uses different value set. Ex: IP, port, account ... etc.
+It also needs a config management tools.</p>
+<p>Cowfig is a JSON format template parser.
+It parse excel, JSON files, provides <em>query</em> method to get value set.</p>
+<p>Developer write the cowfig template files. 
+Cowfig take care Excel parsing, different environment value set maping 
+then generate final config.json files. </p>
+<h2 id="features">Features</h2>
+<ul>
+<li>Environment awared<ul>
+<li>Parse same template with different environment value set</li>
+<li>Extend environment only template
+_   Parser plugin system</li>
+<li>Write your file parser as plugin and use it</li>
+<li>Builtin parser: JSON, Excel, YAML, INI</li>
+</ul>
+</li>
+<li>Customize scripts<ul>
+<li>Macro function for on-the-fly processing</li>
+<li>Post process after template been parsed</li>
+</ul>
+</li>
+</ul>
+<h2 id="installation">Installation</h2>
+<pre><code>npm install -g https://github.com/kywk/cowfig
+</code></pre><h2 id="quick-start">Quick Start</h2>
+<p><strong>Write your template</strong></p>
+<pre><code>$ mkdir config config/template config/source
+$ vi config/template/configTemplate.cowfig
+  ...
+$ vi config/source/dataSet.json
+  ...
+</code></pre><p><strong>Generate config.json files</strong></p>
+<pre><code class="lang-bash">$ cowfig -h
+Usage: cowfig [-t TEMPLATE] [<span class="hljs-_">-s</span> RESOURCE] [<span class="hljs-_">-d</span> DESTINATION] [<span class="hljs-_">-e</span> ENV] [-o overwrite]
+$ cowfig <span class="hljs-_">-d</span> .
+</code></pre>
+<h3 id="arguments-descript">Arguments descript</h3>
+<ul>
+<li><strong>-t TemplateBase</strong>: The cowfig template files path.<br>Cowfig find all .cowfig files includes sub directory under TemplateBase.
+Build the files tree, then parse those template files.</li>
+<li><strong>-s ResourceBase</strong>: The value set files path.<br>Store your excel or json value set file.
+Cowfig load the .xlsx .json files and provides query method to get value set.</li>
+<li><strong>-d DestinationBase</strong>: Where the final JSON file stores.<br>Cowfig write out find JSON files based on where they find under TemplateBase.</li>
+<li><strong>-e Environment</strong>: Specify the target enviroment.  </li>
+<li><strong>-o Overwrite</strong>:<br>If target file is already exist, overwrite it or not?<ul>
+<li>&apos;auto&apos;: (default) auto detect last modified date. <pre><code>    Overwrite if newer verseion is out.  
+</code></pre></li>
+<li>&apos;always&apos;: always overwrite target file.</li>
+<li>&apos;never&apos;: never overwrite target file.  </li>
+</ul>
+</li>
+<li><strong>-c Cowfig option file</strong>:<br>A cowfigOpt config file for those setting. </li>
+</ul>
+<h3 id="simple-example">Simple example</h3>
+<p><strong>Cowfig config file: cowfig.json</strong></p>
+<pre><code>{
+  &quot;env&quot;: &quot;stage&quot;,
+  &quot;templateBase&quot;: &quot;example/template/&quot;,
+  &quot;parser&quot;: {
+    &quot;srcBase&quot;: &quot;example/source/&quot;
+  },
+  &quot;writer&quot;: {
+    &quot;destBase&quot;: &quot;config&quot;,
+    &quot;overwrite&quot;: &quot;auto&quot;,
+  }
+};
+</code></pre><p><strong>Source file tree</strong></p>
+<pre><code>&#x2514;&#x2500;&#x2500; example
+    &#x251C;&#x2500;&#x2500; source
+    &#x2502;   &#x251C;&#x2500;&#x2500; valueSet.xlsx
+    &#x2502;   &#x251C;&#x2500;&#x2500; hostInfo.json
+    &#x2502;   &#x2514;&#x2500;&#x2500; stage
+    &#x2502;       &#x2514;&#x2500;&#x2500; hostInfo.json
+    &#x2514;&#x2500;&#x2500; template
+        &#x251C;&#x2500;&#x2500; host
+        &#x2502;   &#x2514;&#x2500;&#x2500; servers.cowfig
+        &#x2514;&#x2500;&#x2500; config.cowfig
+</code></pre><p><strong>Generate config.json</strong>
+Use CLI args</p>
+<pre><code>$ cowfig -t example/template -s example/source -d config -e stage
+</code></pre><p>or Use cowfig config file</p>
+<pre><code>$ cowfig -c cowfig.json
+</code></pre><p><strong>Result target files</strong></p>
+<pre><code>&#x2514;&#x2500;&#x2500; config
+    &#x251C;&#x2500;&#x2500; host
+    &#x2502;   &#x2514;&#x2500;&#x2500; servers.json
+    &#x2514;&#x2500;&#x2500; config.json
+</code></pre><h2 id="more-information">More Information</h2>
+<p>Read the <a href="https://github.com/kywk/cowfig/tree/master/doc" target="_blank">documentation</a></p>
+<h2 id="license">License</h2>
+<p>MIT</p>
+
+                                
+                                </section>
+                            
+    </div>
+    <div class="search-results">
+        <div class="has-results">
+            
+            <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+            <ul class="search-results-list"></ul>
+            
+        </div>
+        <div class="no-results">
+            
+            <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+            
+        </div>
+    </div>
+</div>
+
+                        </div>
+                    </div>
+                
+            </div>
+
+            
+                
+                
+                <a href="doc/CLI.md" class="navigation navigation-next navigation-unique" aria-label="Next page: Command line interface">
+                    <i class="fa fa-angle-right"></i>
+                </a>
+                
+            
+        
+    </div>
+
+    <script>
+        var gitbook = gitbook || [];
+        gitbook.push(function() {
+            gitbook.page.hasChanged({"page":{"title":"Introduction","level":"1.1","depth":1,"next":{"title":"Command line interface","level":"1.2","depth":1,"path":"doc/CLI.md","ref":"doc/CLI.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":["livereload"],"pluginsConfig":{"livereload":{},"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"README.md","mtime":"2017-09-20T07:51:44.000Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2017-10-03T08:08:32.366Z"},"basePath":".","book":{"language":""}});
+        });
+    </script>
+</div>
+
+        
+    <script src="gitbook/gitbook.js"></script>
+    <script src="gitbook/theme.js"></script>
+    
+        
+        <script src="gitbook/gitbook-plugin-livereload/plugin.js"></script>
+        
+    
+        
+        <script src="gitbook/gitbook-plugin-search/search-engine.js"></script>
+        
+    
+        
+        <script src="gitbook/gitbook-plugin-search/search.js"></script>
+        
+    
+        
+        <script src="gitbook/gitbook-plugin-lunr/lunr.min.js"></script>
+        
+    
+        
+        <script src="gitbook/gitbook-plugin-lunr/search-lunr.js"></script>
+        
+    
+        
+        <script src="gitbook/gitbook-plugin-sharing/buttons.js"></script>
+        
+    
+        
+        <script src="gitbook/gitbook-plugin-fontsettings/fontsettings.js"></script>
+        
+    
+
+    </body>
+</html>
+
