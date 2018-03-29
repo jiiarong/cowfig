@@ -23,7 +23,7 @@ let override = require('./lib/util/override');
 const CWD = process.cwd() + '/';
 let cowfigOpt = {
   env: process.env.NODE_ENV,
-  envPrefix: '_',
+  envPrefix: '',
   templateBase: CWD + 'config/template/',
   // TODO: plugins under construction
   plugins: {
